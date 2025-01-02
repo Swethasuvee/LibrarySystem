@@ -45,8 +45,6 @@ Future Enhancements
 Online Reservation: Implement functionality to allow members to reserve books.
 Fine Payment Integration: Integrate with payment gateways for fine payments.
 Reporting Enhancements: Add additional reports like book popularity by genre and member borrowing trends.
-License
-This project is licensed under the MIT License - see the LICENSE file for details.
 
 Acknowledgements
 Zoho Creator for providing a powerful low-code platform to build this library management system.
