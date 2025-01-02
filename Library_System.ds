@@ -1,0 +1,1581 @@
+/*
+ * Author       : swethasuvee
+ * Generated on : 02-Jan-2025 14:08:48
+ * Version      : 1.0
+ */
+ application "Library System"
+ {
+ 	date format = "dd-MMM-yyyy"
+ 	time zone = "Asia/Kolkata"
+ 	time format = "24-hr"
+ 	section Dashboard
+	{
+		icon = "ui-1-dashboard-half"
+		page Dashboard
+		{
+			displayname = "Dashboard"
+			icon = "ui-1-dashboard-half"
+			Content="<zml    \t\t\n\t\t\n\t\t\n\t\t\twebDeviceConfig='{\"layout\":{\"displayType\":\"card\",\"design\":\"fluid\",\"style\":\"padding-right:0px;padding-top:0px;padding-bottom:0px;padding-left:0px;\"}}'\n\t\t\n\t\t\n>\n\t<layout>\n\t<row>\n\t<column\n   \t\t width=\"100%\"\n   \t>\n\t<chart \n\telementName=\"Chart\"\n\n\ttype = 'Pie'\n\tbgColor = '#FFFFFF'\n\ttheme = 'theme1'\n\tlegendPos = 'center.top'\n\tappLinkName = 'thisapp'\n\tformLinkName = 'Transactions'\n\txfield = 'Book.Genre'\n\tyfields = 'count:Book.Genre'\n\/>\n\n<\/column>\n<\/row><row>\n\t<column\n   \t\t width=\"100%\"\n   \t>\n\t<report \n\telementName=\"Report\"\n\n\t\tappLinkName = 'thisapp'\n\t\tlinkName = 'All_Staff_Members'\n\t\n\t\tiszreport = 'false'\n\theightType = 'auto'\n\theightValue = '700'\n\n\/>\n<\/column>\n<\/row>\n<\/layout>\n<\/zml>"
+		}
+	}
+	section Books
+	{
+		icon = "education-books-46"
+		form Books
+		{
+			success message = "Book Added Successfully"
+			field alignment = left
+			Author
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			Book_ID
+			(
+    			type = autonumber
+				displayname = "Book ID"
+				start index = 1
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Title
+			(
+    			type = text
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Author1
+			(
+    			type = text
+				displayname = "Author"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Genre
+			(
+				type = picklist
+				maxchar = 100
+				values = {"Fiction","Non-Fiction","Sci-Fi","Biography"}
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Publication_Year
+			(
+				type = number
+				displayname = "Publication Year"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Available_Copies
+			(
+				type = number
+				displayname = "Available Copies"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			ISBN_Number
+			(
+    			type = text
+				displayname = "ISBN Number"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Rating
+			(
+				type = number
+				maxchar = 5
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Featured
+			(
+				type = checkboxes	
+				values = {"Yes","No"}
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+	
+			customize
+			(
+				icon = "education-books-46"
+			)
+			actions
+			{
+				on add
+				{
+					submit
+					(
+   						type = submit
+   						displayname = "Submit"
+					)
+					reset
+					(
+   						type = reset
+   						displayname = "Reset"
+					)
+				}
+				on edit
+				{
+					update
+					(
+   						type = submit
+   						displayname = "Update"
+					)
+					cancel
+					(
+   						type = cancel
+   						displayname = "Cancel"
+					)
+				}
+			}
+		}
+		default list All_Books
+		{
+			displayName = "All Books"
+			show all rows from Books    
+			(
+				Genre
+				Title
+				Author1 as "Author"
+				Available_Copies as "Available Copies"
+				ISBN_Number as "ISBN Number"
+				Rating
+				Book_ID as "Book ID"
+				Publication_Year as "Publication Year"
+				Featured
+			)
+			options
+			(
+				icon = "education-books-46"
+	 		)
+			quickview
+			(
+				layout
+				(
+		 			type = -1
+					datablock1
+					(
+						layout type = -1
+						fields
+						(
+							Genre
+							Title
+							Author1 as "Author"
+							Available_Copies as "Available Copies"
+							ISBN_Number as "ISBN Number"
+							Book_ID as "Book ID"
+							Publication_Year as "Publication Year"
+						)
+					)
+				)
+				menu
+    			(
+    	 			header
+    	 			(
+    		 			Edit 
+    		 			Duplicate 
+    		 			Delete 
+    	 			)
+					record
+					(
+						Edit   	   
+						Duplicate   	   
+						Delete   	   
+    				)
+    			)
+    			action
+    			(
+					on click
+					(
+						View Record   	   
+    				)
+					on right click
+					(
+						Edit   	   
+						Delete   	   
+						Duplicate   	   
+						View Record   	   
+    				)
+     			)
+			)
+			detailview
+			(
+				layout
+				(
+		 			type = 1
+					datablock1
+					(
+						layout type = -2
+						fields
+						(
+							Genre
+							Title
+							Author1 as "Author"
+							Available_Copies as "Available Copies"
+							ISBN_Number as "ISBN Number"
+							Rating
+							Book_ID as "Book ID"
+							Publication_Year as "Publication Year"
+							Featured
+						)
+					)
+				)
+				menu
+    			(
+    	 			header
+    	 			(
+    		 			Edit 
+    		 			Duplicate 
+    		 			Delete 
+    	 			)
+    			)
+			)
+		}
+	}
+	section Members
+	{
+		icon = "users-multiple-11"
+		form Members
+		{
+			success message = "Member Added Successfully"
+			field alignment = left
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			Member_ID
+			(
+    			type = autonumber
+				displayname = "Member ID"
+				start index = 1
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Name
+			(
+    			type = text
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Email
+			(
+    			type = email
+				maxchar = 80
+	 			row = 1
+	 			column = 1   
+				width = medium
+				personal data = true
+			)
+			Phone_Number
+			(
+				type = number
+				displayname = "Phone Number"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Membership_Start_Date
+			(
+    			type = date
+				displayname = "Membership Start Date"
+				initial value = "01-Jan-2025"
+				alloweddays = 0,1,2,3,4,5,6
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Membership_Type
+			(
+				type = picklist
+				displayname = "Membership Type"
+				maxchar = 100
+				values = {"Basic","Premium","Elite"}
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Max_Books_Allowed
+			(
+				type = number
+				displayname = "Max Books Allowed"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+	
+			customize
+			(
+				icon = "users-multiple-11"
+			)
+			actions
+			{
+				on add
+				{
+					submit
+					(
+   						type = submit
+   						displayname = "Submit"
+					)
+					reset
+					(
+   						type = reset
+   						displayname = "Reset"
+					)
+				}
+				on edit
+				{
+					update
+					(
+   						type = submit
+   						displayname = "Update"
+					)
+					cancel
+					(
+   						type = cancel
+   						displayname = "Cancel"
+					)
+				}
+			}
+		}
+		default list All_Members
+		{
+			displayName = "All Members"
+			show all rows from Members    
+			(
+				Member_ID as "Member ID"
+				Name
+				Email
+				Phone_Number as "Phone Number"
+				Membership_Start_Date as "Membership Start Date"
+				Membership_Type as "Membership Type"
+				Max_Books_Allowed as "Max Books Allowed"
+			)
+			options
+			(
+				icon = "travel-world"
+	 		)
+			quickview
+			(
+				layout
+				(
+		 			type = -1
+					datablock1
+					(
+						layout type = -1
+						fields
+						(
+							Member_ID as "Member ID"
+							Name
+							Email
+							Phone_Number as "Phone Number"
+							Membership_Start_Date as "Membership Start Date"
+							Membership_Type as "Membership Type"
+							Max_Books_Allowed as "Max Books Allowed"
+						)
+					)
+				)
+				menu
+    			(
+    	 			header
+    	 			(
+    		 			Edit 
+    		 			Duplicate 
+    		 			Delete 
+    	 			)
+					record
+					(
+						Edit   	   
+						Duplicate   	   
+						Delete   	   
+    				)
+    			)
+    			action
+    			(
+					on click
+					(
+						View Record   	   
+    				)
+					on right click
+					(
+						Edit   	   
+						Delete   	   
+						Duplicate   	   
+						View Record   	   
+    				)
+     			)
+			)
+			detailview
+			(
+				layout
+				(
+		 			type = 1
+					datablock1
+					(
+						layout type = -2
+						fields
+						(
+							Member_ID as "Member ID"
+							Name
+							Email
+							Phone_Number as "Phone Number"
+							Membership_Start_Date as "Membership Start Date"
+							Membership_Type as "Membership Type"
+							Max_Books_Allowed as "Max Books Allowed"
+						)
+					)
+				)
+				menu
+    			(
+    	 			header
+    	 			(
+    		 			Edit 
+    		 			Duplicate 
+    		 			Delete 
+    	 			)
+    			)
+			)
+		}
+	}
+	section Transactions
+	{
+		icon = "business-calculator"
+		form Transactions
+		{
+			success message = "Transaction Added Successfully"
+			field alignment = left
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			Transaction_ID
+			(
+    			type = autonumber
+				displayname = "Transaction ID"
+				start index = 1
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Members
+			(
+				type = picklist	
+				values  = Members.ID
+    			displayformat = [Name]
+				sortorder = ascending
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Book
+			(
+				type = picklist	
+				values  = Books.ID
+    			displayformat = [Title]
+				sortorder = ascending
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Issue_Date
+			(
+    			type = date
+				displayname = "Issue Date"
+				alloweddays = 0,1,2,3,4,5,6
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Return_Date
+			(
+    			type = date
+				displayname = "Return Date"
+				alloweddays = 0,1,2,3,4,5,6
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Status
+			(
+				type = picklist
+				maxchar = 100
+				values = {"Issued","Returned","Overdue"}
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Fine_Amount
+			(
+				displayname = "Fine Amount"
+				type = INR
+				format = commadotindian
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+	
+			customize
+			(
+				icon = "business-calculator"
+			)
+			actions
+			{
+				on add
+				{
+					submit
+					(
+   						type = submit
+   						displayname = "Submit"
+					)
+					reset
+					(
+   						type = reset
+   						displayname = "Reset"
+					)
+				}
+				on edit
+				{
+					update
+					(
+   						type = submit
+   						displayname = "Update"
+					)
+					cancel
+					(
+   						type = cancel
+   						displayname = "Cancel"
+					)
+				}
+			}
+		}
+		default list All_Transactions
+		{
+			displayName = "All Transactions"
+			show all rows from Transactions    
+			(
+				Transaction_ID as "Transaction ID"
+				Members
+				Book
+				Issue_Date as "Issue Date"
+				Return_Date as "Return Date"
+				Status
+				Fine_Amount as "Fine Amount"
+			)
+			options
+			(
+				icon = "travel-world"
+	 		)
+			quickview
+			(
+				layout
+				(
+		 			type = -1
+					datablock1
+					(
+						layout type = -1
+						fields
+						(
+							Transaction_ID as "Transaction ID"
+							Members
+							Book
+							Issue_Date as "Issue Date"
+							Return_Date as "Return Date"
+							Status
+							Fine_Amount as "Fine Amount"
+						)
+					)
+				)
+				menu
+    			(
+    	 			header
+    	 			(
+    		 			Edit 
+    		 			Duplicate 
+    		 			Delete 
+    	 			)
+					record
+					(
+						Edit   	   
+						Duplicate   	   
+						Delete   	   
+    				)
+    			)
+    			action
+    			(
+					on click
+					(
+						View Record   	   
+    				)
+					on right click
+					(
+						Edit   	   
+						Delete   	   
+						Duplicate   	   
+						View Record   	   
+    				)
+     			)
+			)
+			detailview
+			(
+				layout
+				(
+		 			type = 1
+					datablock1
+					(
+						layout type = -2
+						fields
+						(
+							Transaction_ID as "Transaction ID"
+							Members
+							Book
+							Issue_Date as "Issue Date"
+							Return_Date as "Return Date"
+							Status
+							Fine_Amount as "Fine Amount"
+						)
+					)
+				)
+				menu
+    			(
+    	 			header
+    	 			(
+    		 			Edit 
+    		 			Duplicate 
+    		 			Delete 
+    	 			)
+    			)
+			)
+		}
+		list Overdue_Books_Report
+		{
+			displayName = "Overdue Books Report"
+			show all rows from Transactions  [Status == "Overdue"]  
+			(
+				Transaction_ID as "Transaction ID"
+				Members
+				Book
+				Issue_Date as "Issue Date"
+				Return_Date as "Return Date"
+				Status
+				Fine_Amount as "Fine Amount"
+			)
+			options
+			(
+				icon = "education-books-46"
+	 		)
+			conditional formatting
+			(
+				"New Formatting"
+				{
+				fields = [Transaction_ID]
+				format = "color:#ffffff;background-color:#765f89;"
+				}
+			)
+			quickview
+			(
+				layout
+				(
+		 			type = -1
+					datablock1
+					(
+						layout type = -1
+						fields
+						(
+							Transaction_ID as "Transaction ID"
+							Members
+							Book
+							Issue_Date as "Issue Date"
+							Return_Date as "Return Date"
+							Status
+							Fine_Amount as "Fine Amount"
+						)
+					)
+				)
+				menu
+    			(
+    	 			header
+    	 			(
+    		 			Edit 
+    		 			Duplicate 
+    		 			Delete 
+    	 			)
+					record
+					(
+						Edit   	   
+						Duplicate   	   
+						Delete   	   
+    				)
+    			)
+    			action
+    			(
+					on click
+					(
+						View Record   	   
+    				)
+					on right click
+					(
+						Edit   	   
+						Delete   	   
+						Duplicate   	   
+						View Record   	   
+    				)
+     			)
+			)
+			detailview
+			(
+				layout
+				(
+		 			type = 1
+					datablock1
+					(
+						layout type = -2
+						fields
+						(
+							Transaction_ID as "Transaction ID"
+							Members
+							Book
+							Issue_Date as "Issue Date"
+							Return_Date as "Return Date"
+							Status
+							Fine_Amount as "Fine Amount"
+						)
+					)
+				)
+				menu
+    			(
+    	 			header
+    	 			(
+    		 			Edit 
+    		 			Duplicate 
+    		 			Delete 
+    	 			)
+    			)
+			)
+		}
+		list Top_Members_Report
+		{
+			displayName = "Top Members Report"
+			show all rows from Transactions    
+			(
+				Transaction_ID as "Transaction ID"
+				Members
+				Book
+				Issue_Date as "Issue Date"
+				Return_Date as "Return Date"
+				Status
+				Fine_Amount as "Fine Amount"
+				Members.Name
+			)
+			group by
+			(
+				Members.Name ascending
+			)
+			sort by
+			(
+				Members.Name ascending
+			)
+			options
+			(
+				icon = "business-progress"
+	 		)
+			quickview
+			(
+				layout
+				(
+		 			type = -1
+					datablock1
+					(
+						layout type = -1
+						fields
+						(
+							Transaction_ID as "Transaction ID"
+							Members
+							Book
+							Issue_Date as "Issue Date"
+							Return_Date as "Return Date"
+							Status
+							Fine_Amount as "Fine Amount"
+						)
+					)
+				)
+				menu
+    			(
+    	 			header
+    	 			(
+    		 			Edit 
+    		 			Duplicate 
+    		 			Delete 
+    	 			)
+					record
+					(
+						Edit   	   
+						Duplicate   	   
+						Delete   	   
+    				)
+    			)
+    			action
+    			(
+					on click
+					(
+						View Record   	   
+    				)
+					on right click
+					(
+						Edit   	   
+						Delete   	   
+						Duplicate   	   
+						View Record   	   
+    				)
+     			)
+			)
+			detailview
+			(
+				layout
+				(
+		 			type = 1
+					datablock1
+					(
+						layout type = -2
+						fields
+						(
+							Transaction_ID as "Transaction ID"
+							Members
+							Book
+							Issue_Date as "Issue Date"
+							Return_Date as "Return Date"
+							Status
+							Fine_Amount as "Fine Amount"
+						)
+					)
+				)
+				menu
+    			(
+    	 			header
+    	 			(
+    		 			Edit 
+    		 			Duplicate 
+    		 			Delete 
+    	 			)
+    			)
+			)
+		}
+	}
+	section Staff_Members
+	{
+		displayname= "Staff Members"
+		icon = "holidays-sickle"
+		form Staff_Members
+		{
+			displayname = "Staff Members"
+			success message = "Staff Member Added Successfully"
+			field alignment = left
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			Staff_ID
+			(
+    			type = autonumber
+				displayname = "Staff ID"
+				start index = 1
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			must have Name
+			(
+    			type = text
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Email
+			(
+    			type = email
+				maxchar = 80
+	 			row = 1
+	 			column = 1   
+				width = medium
+				personal data = true
+			)
+			Role
+			(
+				type = picklist
+				maxchar = 100
+				values = {"Librarian","Assistant"}
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			Phone_Number1
+			(
+    			type = phonenumber
+				displayname = "Phone Number"
+	 			row = 1
+	 			column = 1   
+				width = medium
+				personal data = true
+			)
+	
+			customize
+			(
+				icon = "holidays-sickle"
+			)
+			actions
+			{
+				on add
+				{
+					submit
+					(
+   						type = submit
+   						displayname = "Submit"
+					)
+					reset
+					(
+   						type = reset
+   						displayname = "Reset"
+					)
+				}
+				on edit
+				{
+					update
+					(
+   						type = submit
+   						displayname = "Update"
+					)
+					cancel
+					(
+   						type = cancel
+   						displayname = "Cancel"
+					)
+				}
+			}
+		}
+		default list All_Staff_Members
+		{
+			displayName = "All Staff Members"
+			show all rows from Staff_Members    
+			(
+				Staff_ID as "Staff ID"
+				Name
+				Email
+				Role
+				Phone_Number1 as "Phone Number"
+				(
+					displayformat = plainnumber 
+					linktodial = enable
+				)
+			)
+			options
+			(
+				icon = "travel-world"
+	 		)
+			quickview
+			(
+				layout
+				(
+		 			type = -1
+					datablock1
+					(
+						layout type = -1
+						fields
+						(
+							Staff_ID as "Staff ID"
+							Name
+							Email
+							Role
+							Phone_Number1 as "Phone Number"
+						)
+					)
+				)
+				menu
+    			(
+    	 			header
+    	 			(
+    		 			Edit 
+    		 			Duplicate 
+    		 			Delete 
+    	 			)
+					record
+					(
+						Edit   	   
+						Duplicate   	   
+						Delete   	   
+    				)
+    			)
+    			action
+    			(
+					on click
+					(
+						View Record   	   
+    				)
+					on right click
+					(
+						Edit   	   
+						Delete   	   
+						Duplicate   	   
+						View Record   	   
+    				)
+     			)
+			)
+			detailview
+			(
+				layout
+				(
+		 			type = 2
+					datablock1
+					(
+						layout type = -2
+		     			title = "Overview"
+						fields
+						(
+							Staff_ID as "Staff ID"
+							Name
+							Email
+							Role
+							Phone_Number1 as "Phone Number"
+						)
+					)
+				)
+				menu
+    			(
+    	 			header
+    	 			(
+    		 			Edit 
+    		 			Duplicate 
+    		 			Delete 
+    	 			)
+    			)
+			)
+		}
+	}
+
+
+
+
+
+
+		workflow
+		{
+		form
+		{
+			Validate_ISBN_Uniqueness as "Validate ISBN Uniqueness"
+			{
+				type =  form
+				form = Books
+				record event = on add
+
+				on success
+				{
+				}
+
+			}
+			Validate_ISBN_Uniqueness1 as "Validate ISBN Uniqueness"
+			{
+				type =  form
+				form = Books
+				record event = on add
+
+				on validate
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											if(Books[ISBN_Number == input.ISBN_Number].count() > 0)
+										{
+											alert "ISBN Number already exists.";
+											cancel submit;
+										}
+						)
+					}
+				}
+
+			}
+			Validate_Publication_Year as "Validate Publication Year"
+			{
+				type =  form
+				form = Books
+				record event = on add
+
+				on user input of Publication_Year
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											if(input.Publication_Year < 1900 || input.Publication_Year > zoho.currentdate.getYear())
+										{
+											alert "Enter a valid publication year.";
+											input.Publication_Year = null;
+										}
+						)
+					}
+				}
+
+			}
+			Prevent_Duplicate_Emails as "Prevent Duplicate Emails"
+			{
+				type =  form
+				form = Members
+				record event = on add
+
+				on validate
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											if(Members[Email == input.Email].count() > 0)
+										{
+											alert "Email already exists.";
+											cancel submit;
+										}
+						)
+					}
+				}
+
+			}
+			Auto_fill_Max_Books_Allow as "Auto-fill Max Books Allowed"
+			{
+				type =  form
+				form = Members
+				record event = on add
+
+				on user input of Membership_Type
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											if(input.Membership_Type == "Basic")
+										{
+											input.Max_Books_Allowed = 2;
+										}
+										else if(input.Membership_Type == "Premium")
+										{
+											input.Max_Books_Allowed = 5;
+										}
+										else if(input.Membership_Type == "Elite")
+										{
+											input.Max_Books_Allowed = 10;
+										}
+						)
+					}
+				}
+
+			}
+			Check_Available_Copies as "Check Available Copies"
+			{
+				type =  form
+				form = Transactions
+				record event = on add
+
+				on validate
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											if(Books[Book_ID == input.Book].Available_Copies <= 0)
+										{
+											alert "No copies available.";
+											cancel submit;
+										}
+						)
+					}
+				}
+
+			}
+			Validate_Return_Date as "Validate Return Date"
+			{
+				type =  form
+				form = Transactions
+				record event = on add
+
+				on user input of Return_Date
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											if(input.Return_Date <= input.Issue_Date)
+										{
+											alert "Return Date must be after Issue Date.";
+											input.Return_Date = null;
+										}
+						)
+					}
+				}
+
+			}
+			Decrease_Available_Copies as "Decrease Available Copies on Issue"
+			{
+				type =  form
+				form = Books
+				record event = on add
+
+				on validate
+				{
+				}
+
+			}
+			Automatically_Decrease_Av as "Automatically Decrease Available Copies"
+			{
+				type =  form
+				form = Transactions
+				record event = on add
+
+				on validate
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											book_record = Books[Book_ID == input.Book];
+										if(book_record.count() > 0)
+										{
+											book_record.Available_Copies=book_record.Available_Copies - 1;
+											// Now update the record correctly
+											input.Book.update(book_record.ID,{"Available_Copies":book_record.Available_Copies});
+										}
+										else
+										{
+											alert "Book not found.";
+										}
+						)
+					}
+				}
+
+			}
+			Increase_Available_Copies as "Increase Available Copies on Return"
+			{
+				type =  form
+				form = Transactions
+				record event = on add
+
+				on validate
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											if(input.Status == "Returned")
+										{
+											book_record = Books[Book_ID == input.Book];
+											if(book_record.count() > 0)
+											{
+												book_record.Available_Copies=book_record.Available_Copies + 1;
+												// Correct way to update the record
+												input.Book.update(book_record.ID,{"Available_Copies":book_record.Available_Copies});
+											}
+											else
+											{
+												alert "Book not found.";
+											}
+										}
+						)
+					}
+				}
+
+			}
+			Decrease_Available_Copies1 as "Decrease Available Copies"
+			{
+				type =  form
+				form = Transactions
+				record event = on add
+
+				on validate
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											book_record = Books[Book_ID == input.Book];
+										// Fetch the book record
+										if(book_record.count() > 0)
+										{
+											// Check if the book record exists
+											if(book_record.Available_Copies > 0)
+											{
+												// Check if there are copies available
+												book_record.Available_Copies=book_record.Available_Copies - 1;
+												// Decrease available copies
+												input.Book.update(book_record.ID,{"Available_Copies":book_record.Available_Copies});
+												// Update the record
+											}
+											else
+											{
+												alert "No copies available.";
+												// Alert if no copies are available
+											}
+										}
+										else
+										{
+											alert "Book not found.";
+											// Alert if the book is not found
+										}
+						)
+					}
+				}
+
+			}
+			Calculate_Fine_Amount_for as "Calculate Fine Amount for Overdue Books"
+			{
+				type =  form
+				form = Transactions
+				record event = on add
+
+				on validate
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											overdue_days = (zoho.currentdate - input.Return_Date);
+										if(overdue_days > 0)
+										{
+											input.Fine_Amount = overdue_days * 2;
+											// $2 per day overdue
+										}
+										else
+										{
+											input.Fine_Amount = 0;
+										}
+						)
+					}
+				}
+
+			}
+			Send_an_Email_to_Members_ as "Send an Email to Members for Overdue Books"
+			{
+				type =  form
+				form = Transactions
+				record event = on add
+
+				on validate
+				{
+				}
+
+			}
+			Send_Email_Form_Propertie as "Send Email - Form Properties"
+			{
+				type =  presuccess
+				form = Books
+				on start
+				{
+					actions 
+					{
+						sendmail
+						(
+							from : "zoho.adminuserid"
+							to : "zoho.adminuserid"
+							subject : "Library System : New entry added"
+							message : "Hello,<br/><br/>A new entry added in 'Books' form of 'Library System' application.<br/><br><br>"
+							attachments : template : _default as inline
+						)
+					}
+				}
+			}
+			Mark_as_Lost as "Mark as Lost"
+			{
+				type =  form
+				form = Transactions
+				record event = on add
+
+				on validate
+				{
+				}
+
+			}
+		}
+
+
+
+
+
+
+	}
+	share_settings
+	{
+			"Read"
+			{
+				name = "Read"
+				type = Users_Permissions
+				permissions = {Chat:true, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "This profile will have read permission for all components\n"
+			}
+			"Write"
+			{
+				name = "Write"
+				type = Users_Permissions
+				permissions = {Chat:false, Predefined:false, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "This profile will have write permission for all components\n"
+				ModulePermissions
+				{
+					Transactions
+					{
+						enabled= Create,Viewall,Modifyall,Import,Export,Tab 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							Overdue_Books_Report={"View","Edit","Delete"}
+							All_Transactions={"View","Edit","Delete"}
+						}
+					}
+					Staff_Members
+					{
+						enabled= Create,Viewall,Modifyall,Import,Export,Tab 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							All_Staff_Members={"View","Edit","Delete"}
+						}
+					}
+					Books
+					{
+						enabled= Create,Viewall,Modifyall,Import,Export,Tab 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							All_Books={"View","Edit","Delete"}
+						}
+					}
+					Members
+					{
+						enabled= Create,Viewall,Modifyall,Import,Export,Tab 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							All_Members={"View","Edit","Delete"}
+						}
+					}
+					Dashboard
+					{
+						enabled = tab
+					}
+				}
+			}
+			"Developer"
+			{
+				name = "Developer"
+				type = Developer
+				permissions = {Chat:false, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "Developer Profile\n"
+			}
+			"Administrator"
+			{
+				name = "Administrator"
+				type = Users_Permissions
+				permissions = {Chat:true, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "This profile will have all the permissions.\n"
+			}
+			"Customer"
+			{
+				name = "Customer"
+				type = Customer_Portal
+				permissions = {Chat:true, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "This is the default profile having only add and view permission.\n"
+			}
+			roles
+			{
+				"CEO"
+				{
+					description = "User belonging to this role can access data of all other users."
+					"Librarian"
+					{
+						description = ""
+						share data with peers = true
+					}
+					"Assistant"
+					{
+						description = ""
+					}
+				}
+			}
+	}
+
+	customize
+	{
+		
+		layout = "tab"
+		color = "black"
+		base theme = "professional"
+		new theme = 11
+		icons = true
+		icons style = outline
+		font = "lato"
+		color options
+    	{
+        color = "1"
+    	}
+    	logo
+    	{
+        	preference = "none"
+        	placement = "left"
+    	}
+	}
+
+
+	phone
+	{
+		customize
+		{
+        	layout = slidingpane
+		 	icons style = outline
+        	font = "default"
+            style = "3"
+        	color options
+        	{
+             	color = amethyst
+         	}
+         	logo
+         	{
+             	preference = "none"
+         	}
+		}
+	}
+	tablet
+	{
+		customize
+		{
+        	layout = slidingpane
+		 	icons style = outline
+        	font = "default"
+            style = "3"
+        	color options
+        	{
+             	color = amethyst
+         	}
+         	logo
+         	{
+             	preference = "none"
+         	}
+		}
+	}
+	translation
+{
+{"Language_Settings":{"LANGAGUE_WITH_LOGIN":"browser"}}
+}
+}
